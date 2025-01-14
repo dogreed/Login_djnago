@@ -1,13 +1,64 @@
 {% extends "news2/home.html" %}
 
 {% block content %}
-<form method="post" action="{% url 'news' %}">
-    {% csrf_token %}
-    <div class="news">
-        <h1>Your news will be displayed here </h1>
 
-    </div>                           
-</form>
+<body>
+    <style>
+        /* Add some basic styling for the news page */
+        .news-container {
+            width: 80%;
+            margin: auto;
+        }
+        .news-item {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+        .news-item img {
+            max-width: 100%;
+            height: auto;
+        }
+        .news-title {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .news-description {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+        .read-more {
+            font-size: 1rem;
+            color: #007BFF;
+            text-decoration: none;
+        }
+        .read-more:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="news-container">
+        <h1>Latest News</h1>
+
+        {% for news in news_items %}
+            <div class="news-item">
+                <h2 class="news-title">{{ news.title }}</h2>
+
+                {% if news.image %}
+                    <img src="{{ news.image.url }}" alt="{{ news.title }}">
+                {% endif %}
+
+                <p class="news-description">{{ news.description }}</p> <!-- Truncate to 30 words -->
+                
+            </div>
+        {% empty %}
+            <p>No news available at the moment.</p>
+        {% endfor %}
+    </div></body>
+
+
 {% endblock %}
 
 

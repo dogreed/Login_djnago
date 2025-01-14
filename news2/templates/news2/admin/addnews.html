@@ -1,0 +1,119 @@
+{% extends "news2/admin/admin.html " %}
+
+{% block content %}
+<div class="body">
+
+
+    <style>
+        form {
+            width: 50%;
+            margin: auto;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        input,
+        textarea,
+        button {
+            width: 100%;
+            padding: 0.5rem;
+            font-size: 1rem;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+
+
+    <h1 style="text-align: center;">Add News</h1>
+    <form method="POST" action="{% url 'addnews' %}"  enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" id="title" name="title" required>
+        </div>
+
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea id="description" name="description" rows="5" required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="image">Image</label>
+            <input type="file" id="image" name="image" accept="image/*" required>
+        </div>
+
+
+
+        <button type="submit">Submit</button>
+    </form>
+
+    {% load static %}
+
+    <div class="container mt-5">
+        <h1>Manage News</h1>
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>S.No.</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Image</th>
+                    <th>Completed</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                
+                    {% for news in news_items %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ news.title }}</td>
+                        <td>{{ news.description }}</td>
+                        <td>
+                            {% if news.image %}
+                            <img src="{{ news.image.url }}"  style="max-width: 100px;">
+
+
+                            {% else %}
+                            No Image
+                            {% endif %}
+                        </td>
+                        <td>
+                            | <a href="{% url 'delete_news' news.id %}" onclick="return confirm('Are you sure you want to delete this news item?');">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+               
+
+
+
+
+
+            </tbody>
+            </table>
+    </div>
+
+</div>
+
+
+
+
+{% endblock %}
