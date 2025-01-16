@@ -1,86 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "news2/homeA.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
+{% block content %}
+<form method="post" action="{% url 'home' %}">
+    {% csrf_token %}
 
+    {% load static %}
 
-    <title></title>
-</head>
-<style>
-    li {
-        text-decoration: none;
-        color: black;
+    <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 20px; font-family: Arial, sans-serif;">
 
+        <!-- Featured Section -->
+        <section class="featured" style="display: flex; gap: 20px; margin-bottom: 40px;">
+            <article style="flex: 1; text-align: center; background-color: #f9f9f9; padding: 20px; border-radius: 8px;">
+                <img src="{% static 'images/25647.jpg' %}" alt="News 1" style="width: 100%; max-width: 200px; height: auto; margin-bottom: 15px; border-radius: 8px;">
+                <h2 style="font-size: 1.5em; color: #333;">Breaking News: Major Event Unfolds</h2>
+            </article>
+            <article style="flex: 1; text-align: center; background-color: #f9f9f9; padding: 20px; border-radius: 8px;">
+                <img src="{% static 'images/38581.jpg' %}" alt="News 2" style="width: 100%; max-width: 200px; height: auto; margin-bottom: 15px; border-radius: 8px;">
+                <h2 style="font-size: 1.5em; color: #333;">Top Story: Highlights of the Day</h2>
+            </article>
+        </section>
+    
+        <!-- Latest Articles Section -->
+        <section class="news-section" style="background-color: #fff; padding: 20px; border-radius: 8px;">
+            <h2 style="font-size: 2em; color: #222; margin-bottom: 20px;">Latest Articles</h2>
+            <div class="news-list" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
 
-    }
-</style>
+                <div class="news-item" style="background-color: #f9f9f9; padding: 15px; border-radius: 8px; text-align: center;">
+                    <img src="{% static 'images/38591.jpg' %}" alt="Article 1" style="width: 100%; max-width: 200px; height: auto; margin-bottom: 10px; border-radius: 8px;">
+                    <h3 style="font-size: 1.2em; color: #333;">Headline 1: News Title</h3>
+                    <p style="font-size: 0.9em; color: #555;">Summary of the news article...</p>
+                </div>
 
-<body>
-    <header>
-        <div class="container-fluid" style="top:0; position:fixed; background-color:white;">
-            <div class="container" style="position: fixed; background-color:white;">
-                <div class="row">
-                    <div class="col-md-2" style="display:flex; justify-content:left; ">
-                        <img src="#" alt="LOGO">
+                <div class="news-item" style="background-color: #f9f9f9; padding: 15px; border-radius: 8px; text-align: center;">
+                    <img src="{% static 'images/25647.jpg' %}" alt="Article 2" style="width: 100%; max-width: 200px; height: auto; margin-bottom: 10px; border-radius: 8px;">
+                    <h3 style="font-size: 1.2em; color: #333;">Headline 2: News Title</h3>
+                    <p style="font-size: 0.9em; color: #555;">Summary of the news article...</p>
+                </div>
 
-                    </div>
+                <div class="news-item" style="background-color: #f9f9f9; padding: 15px; border-radius: 8px; text-align: center;">
+                    <img src="{% static 'images/38581.jpg' %}" alt="Article 3" style="width: 100%; max-width: 200px; height: auto; margin-bottom: 10px; border-radius: 8px;">
+                    <h3 style="font-size: 1.2em; color: #333;">Headline 3: News Title</h3>
+                    <p style="font-size: 0.9em; color: #555;">Summary of the news article...</p>
+                </div>
 
-                    <div class="col-md-6">
-                        <ul style="display:flex; justify-content: space-around; list-style: none;">
-                            <a style="text-decoration:none ; color:black; " href="home">
-                                <li>HOME</li>
-                            </a>
-                            <a style="text-decoration: none; color:black;" href="news">
-                                <li>NEWS</li>
-                            </a>
-                            <a style="text-decoration:none; color:black;" href="image">
-                                <li>IMAGES</li>
-                            </a>
-                        </ul>
-
-                    </div>
-
-                    <div class="col-md-4" style="display:flex; justify-content:right;">
-                        <a href="login/">LOGIN</a>
-                      
-                    </div>
+                <div class="news-item" style="background-color: #f9f9f9; padding: 15px; border-radius: 8px; text-align: center;">
+                    <img src="{% static 'images/38581.jpg' %}" alt="Article 4" style="width: 100%; max-width: 200px; height: auto; margin-bottom: 10px; border-radius: 8px;">
+                    <h3 style="font-size: 1.2em; color: #333;">Headline 4: News Title</h3>
+                    <p style="font-size: 0.9em; color: #555;">Summary of the news article...</p>
                 </div>
             </div>
-
-        </div>
-
-
-    </header>
-
-    
-    <div class="conatiner-fluid" style="margin:15px; padding:30px; height:auto;">
-        <div class="container" >
-            {% block content %}
-
-
-            {% endblock %}
-
-        </div>
+        </section>
     </div>
-
-
-
-    <footer>
-        <div class="container-fluid" >
-            <div class="container" style="display:flex; justify-content: center; ">
-
-                <p>&#169; DEVELOP BY RAS</p>
-            </div>
-        </div>
-
-    </footer>
-</body>
-
-</html>
+</form>
+{% endblock %}

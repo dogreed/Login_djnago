@@ -7,12 +7,13 @@ from django.urls import path
 urlpatterns = [
     
     path('', views.home, name='home'),
-    path('home', views.home, name='home'),
-    path('news', views.news, name="news"),
+    # path('home', views.home, name='home'),
+    path('news/', views.news, name="news"),
 
     path('login/', views.loginpage, name='login'),
+    path('logout/', views.logoutv, name='logout'),
   
-    path('image', views.image, name="image"),  
+      
 
     # for admin page
     path('adminmain/', views.admin, name='admin'),

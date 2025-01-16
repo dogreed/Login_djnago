@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
-
-from django.core.files.storage import FileSystemStorage
+from django.contrib.auth.decorators import login_required  
+from django.contrib import messages
 from django.shortcuts import render, redirect
 from .models import AddNews 
 
@@ -23,6 +23,12 @@ def loginpage(request):
     return render (request,"news2/login.html")
 
 
+def logoutv(request):
+    logout(request)
+    messages.success(request,"You have been log out")
+    return redirect('../')
+    
+
 
 def news(request):
      news_items = AddNews.objects.all().order_by('-id')  # You can change the order as needed
@@ -32,12 +38,11 @@ def news(request):
 
 
 
-def image(request):
-    return render(request, "news2/image.html")
+
 
 # for adimin 
 
-
+@login_required(login_url='../login/')
 def addnews(request):
 
     if request.method == 'POST':  # Form was submitted
@@ -61,13 +66,14 @@ def addnews(request):
     return render(request, 'news2/admin/addnews.html', {'news_items': news_items})
 
 
-
+@login_required(login_url='../login/')
 def admin(request):
     return render(request, "news2/admin/admin.html",)
 
 
 
 # delete news 
+
 def delete_news(request, news_id):
     # Fetch the news item or return 404 if not found
     news_item = get_object_or_404(AddNews, id=news_id)
